@@ -1,0 +1,43 @@
+<mat-horizontal-stepper linear #stepper (selectionChange)="selectionChanged($event)">
+  <mat-step>
+    <ng-template matStepLabel>Full Name</ng-template>
+    <mat-form-field>
+      <mat-label>Full name</mat-label>
+      <input matInput placeholder="" [(ngModel)]="personData.name">
+    </mat-form-field>
+    <div>
+      <button mat-button (click)="stepperNextIfNotUndefined(stepper)">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Social Skills</ng-template>
+    <app-social-skills (data)="socialSkillsChanged($event)"></app-social-skills>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Social Media</ng-template>
+    <app-social-media (data)="socialMediaChanged($event)"></app-social-media>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Results</ng-template>
+    <p>Amount of vowels: {{amountOfVowels}}</p>
+    <p>Amount of consonants: {{amountOfConsonants}}</p>
+    <p>Name reversed: {{reversedName}}</p>
+    <p>JSON: {{personData | json}}</p>
+    <p></p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
